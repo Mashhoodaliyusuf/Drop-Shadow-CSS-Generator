@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drop Shadow CSS Generator</title>
+    <meta name="description" content="CSS Drop Shadow Generator online tool. Generate beautiful Drop Shadows CSS." />
+    <!-- Materialize CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .card {
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .preview-container {
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .preview-box {
+            width: 150px;
+            height: 150px;
+            background-color: #2196f3;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .code-container {
+            background-color: #263238;
+            color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            position: relative;
+            min-height: 120px;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        
+        .slider-container {
+            margin: 15px 0;
+        }
+        
+        .color-input {
+            margin-top: 10px;
+        }
+        
+        .range-field {
+            margin-top: 10px;
+        }
+        
+        h4 {
+            color: #2196f3;
+            margin-bottom: 20px;
+        }
+        
+        .card-title {
+            font-weight: 500;
+            color: #424242;
+        }
+        
+        .input-field label {
+            color: #757575;
+        }
+        
+        .input-field input[type=range] + .thumb {
+            background-color: #2196f3;
+        }
+        
+        .input-field input[type=range]::-webkit-slider-thumb {
+            background-color: #2196f3;
+        }
+        
+        .input-field input[type=range]::-moz-range-thumb {
+            background-color: #2196f3;
+        }
+        
+        .btn {
+            background-color: #2196f3;
+            border-radius: 4px;
+            text-transform: none;
+            font-weight: 500;
+        }
+        
+        .btn:hover {
+            background-color: #1976d2;
+        }
+        
+        .toast {
+            background-color: #4caf50;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <h4 class="center-align">Drop Shadow CSS Generator</h4>
+                <p class="center-align">Generate beautiful drop shadows CSS with this easy-to-use tool</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <!-- Preview Section -->
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Preview</span>
+                        <div class="preview-container">
+                            <div class="preview-box" id="previewBox"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Controls Section -->
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Shadow Controls</span>
+                        
+                        <!-- Horizontal Offset -->
+                        <div class="slider-container">
+                            <label for="hOffset">Horizontal Offset (px)</label>
+                            <p class="range-field">
+                                <input type="range" id="hOffset" min="-50" max="50" value="5" />
+                            </p>
+                        </div>
+                        
+                        <!-- Vertical Offset -->
+                        <div class="slider-container">
+                            <label for="vOffset">Vertical Offset (px)</label>
+                            <p class="range-field">
+                                <input type="range" id="vOffset" min="-50" max="50" value="5" />
+                            </p>
+                        </div>
+                        
+                        <!-- Blur Radius -->
+                        <div class="slider-container">
+                            <label for="blur">Blur Radius (px)</label>
+                            <p class="range-field">
+                                <input type="range" id="blur" min="0" max="50" value="10" />
+                            </p>
+                        </div>
+                        
+                        <!-- Spread Radius -->
+                        <div class="slider-container">
+                            <label for="spread">Spread Radius (px)</label>
+                            <p class="range-field">
+                                <input type="range" id="spread" min="0" max="50" value="0" />
+                            </p>
+                        </div>
+                        
+                        <!-- Shadow Color -->
+                        <div class="input-field color-input">
+                            <input type="color" id="shadowColor" value="#000000">
+                            <label style="margin-top:15px" for="shadowColor">Shadow Color</label>
+                        </div><br>
+                        
+                        <!-- Shadow Opacity -->
+                        <div class="slider-container">
+                            <label for="opacity">Shadow Opacity</label>
+                            <p class="range-field">
+                                <input type="range" id="opacity" min="0" max="100" value="50" />
+                            </p>
+                        </div>
+                        
+                        <!-- Inset Shadow -->
+                        <div class="switch">
+                            <label>
+                                Regular Shadow
+                                <input type="checkbox" id="inset">
+                                <span class="lever"></span>
+                                Inset Shadow
+                            </label>
+                        </div>
+                        
+                        <!-- Reset Button -->
+                        <div class="center-align" style="margin-top: 20px;">
+                            <a class="btn waves-effect waves-light" id="resetBtn">
+                                <i class="material-icons left">refresh</i>Reset to Default
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- CSS Code Output -->
+        <div class="row">
+            <div class="col s12">
+                <div class="card">
+                    <div class="card-content">
+                        <span class="card-title">Generated CSS Code</span>
+                        <div class="code-container">
+                            <code id="cssCode">box-shadow: 5px 5px 10px 0px rgba(0,0,0,0.5);</code>
+                            <a class="btn-floating btn-small waves-effect waves-light copy-btn" id="copyBtn">
+                                <i class="material-icons">content_copy</i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Materialize components
+            M.Range.init(document.querySelectorAll('input[type=range]'));
+            
+            // Get DOM elements
+            const hOffset = document.getElementById('hOffset');
+            const vOffset = document.getElementById('vOffset');
+            const blur = document.getElementById('blur');
+            const spread = document.getElementById('spread');
+            const shadowColor = document.getElementById('shadowColor');
+            const opacity = document.getElementById('opacity');
+            const inset = document.getElementById('inset');
+            const previewBox = document.getElementById('previewBox');
+            const cssCode = document.getElementById('cssCode');
+            const copyBtn = document.getElementById('copyBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            
+            // Update shadow function
+            function updateShadow() {
+                const hOffsetValue = hOffset.value;
+                const vOffsetValue = vOffset.value;
+                const blurValue = blur.value;
+                const spreadValue = spread.value;
+                const colorValue = shadowColor.value;
+                const opacityValue = opacity.value / 100;
+                
+                // Convert hex to rgba
+                const hexToRgba = (hex, alpha) => {
+                    const r = parseInt(hex.slice(1, 3), 16);
+                    const g = parseInt(hex.slice(3, 5), 16);
+                    const b = parseInt(hex.slice(5, 7), 16);
+                    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+                };
+                
+                const rgbaColor = hexToRgba(colorValue, opacityValue);
+                const insetValue = inset.checked ? 'inset ' : '';
+                
+                const boxShadowValue = `${insetValue}${hOffsetValue}px ${vOffsetValue}px ${blurValue}px ${spreadValue}px ${rgbaColor}`;
+                
+                // Apply to preview box
+                previewBox.style.boxShadow = boxShadowValue;
+                
+                // Update CSS code
+                cssCode.textContent = `box-shadow: ${boxShadowValue};`;
+            }
+            
+            // Event listeners for all inputs
+            hOffset.addEventListener('input', updateShadow);
+            vOffset.addEventListener('input', updateShadow);
+            blur.addEventListener('input', updateShadow);
+            spread.addEventListener('input', updateShadow);
+            shadowColor.addEventListener('input', updateShadow);
+            opacity.addEventListener('input', updateShadow);
+            inset.addEventListener('change', updateShadow);
+            
+            // Copy to clipboard
+            copyBtn.addEventListener('click', function() {
+                const textArea = document.createElement('textarea');
+                textArea.value = cssCode.textContent;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // Show toast notification
+                M.toast({html: 'CSS copied to clipboard!', classes: 'toast'});
+            });
+            
+            // Reset to default
+            resetBtn.addEventListener('click', function() {
+                hOffset.value = 5;
+                vOffset.value = 5;
+                blur.value = 10;
+                spread.value = 0;
+                shadowColor.value = '#000000';
+                opacity.value = 50;
+                inset.checked = false;
+                
+                // Update Materialize sliders
+                M.Range.init(document.querySelectorAll('input[type=range]'));
+                
+                updateShadow();
+            });
+            
+            // Initialize with default shadow
+            updateShadow();
+        });
+    </script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"6671ec4c9c4d448aa7f57a33372b05e0","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
